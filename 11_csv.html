@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: Loading an external CSV</title>
+		<script type="text/javascript" src="d3.js"></script>
+		<style type="text/css">
+			
+			td {
+				margin: 0;
+				padding: 10px;
+				border: solid 1px gray;
+			}
+
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+			d3.csv("sample_data/test_data.csv", function(data) {
+
+				console.log(data);
+
+				var table = d3.select("body")
+								.append("table");
+
+				var rows = table.selectAll("tr")
+								.data(data)
+								.enter()
+								.append("tr");
+
+				// Name column
+				rows.append("td")
+					.text(function(d) {
+						return d.Name;
+					});
+
+				// Age column
+				rows.append("td")
+					.text(function(d) {
+						return d.Age;
+					});
+
+				// Title column
+				rows.append("td")
+					.text(function(d) {
+						return d.Title;
+					});
+
+			});
+
+		</script>
+	</body>
+</html>

@@ -32,23 +32,23 @@ No prior D3 experience necessary, but prior web experience (HTML, CSS) is needed
 
 ## Outline
 
-• Intro to D3
-• Selecting and creating elements
-• SVG images and elements
-• Transitions and scales
-• BYOD
-• We'll survey the class, discuss hopes and dreams (and data)
-• Working with some participants' data, we'll walk through an example project or two together 
+- Intro to D3
+- Selecting and creating elements
+- SVG images and elements
+- Transitions and scales
+- BYOD
+- We'll survey the class, discuss hopes and dreams (and data)
+- Working with some participants' data, we'll walk through an example project or two together 
 
 
 
 ## What to Bring
 
-• Laptop (Mac, Windows, or Linux are all cool)
-• A current web browser (Chrome, ideally)
-• Your favorite text or code editor (like Sublime, or Brackets)
-• If possible, a local web server (like MAMP or WAMP or a Python server), but don't sweat it if this sounds cryptic (we'll talk about it in person)
-• A data set that you are excited to explore and represent, ideally in a single file in CSV or JSON format 
+- Laptop (Mac, Windows, or Linux are all cool)
+- A current web browser (Chrome, ideally)
+- Your favorite text or code editor (like Sublime, or Brackets)
+- If possible, a local web server (like MAMP or WAMP or a Python server), but don't sweat it if this sounds cryptic (we'll talk about it in person)
+- A data set that you are excited to explore and represent, ideally in a single file in CSV or JSON format 
 
 
 
