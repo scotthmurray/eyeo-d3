@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: Corn Planting Data</title>
+		<script type="text/javascript" src="../d3.js"></script>
+		<style type="text/css">
+
+			body {
+				background-color: #ccc;
+			}
+
+			svg {
+				background-color: white;
+			}
+
+			.axis path,
+			.axis line {
+				fill: none;
+				stroke: black;
+				shape-rendering: crispEdges;
+			}
+			
+			.axis text {
+				font-family: sans-serif;
+				font-size: 11px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+
+
+
+var w = 900;
+var h = 600;
+var padding = 50;
+
+
+//Colors
+var colors = d3.scale.category10();
+
+
+//Date setup
+var timeFormat = d3.time.format("%m/%d");
+
+var startDate = timeFormat.parse("03/31");
+var endDate = timeFormat.parse("06/09");
+
+var years = [ "2011", "2012", "2013", "2014", "2015" ]
+var dates = [ "03/31", "04/07", "04/14", "04/21", "04/28", "05/05", "05/12", "05/19", "05/26", "06/02", "06/09" ];
+
+
+
+//Scales
+var xScale = d3.time.scale()
+				.domain([ startDate, endDate ])
+				.range([ padding, w - padding ]);
+
+var yScale = d3.scale.linear()
+				.domain([ 0, 100 ])
+				.range([ h - padding, padding ]);
+
+
+
+//Line generator
+var line = d3.svg.line()
+			.x(function(d) {
+				return xScale(timeFormat.parse(d.date));
+			})
+			.y(function(d) {
+				return yScale(d.value);
+			});
+
+
+//Axis generators
+var xAxis = d3.svg.axis()
+				.scale(xScale)
+				.orient("bottom");
+
+var yAxis = d3.svg.axis()
+				.scale(yScale)
+				.orient("left")
+				.tickFormat(function(d) {
+					return d + "%";
+				});
+
+
+
+//Load CSV
+d3.csv("cornplanting.csv", function(data) {
+
+	console.log(data);
+
+
+	var dataByYears = [];
+
+	for (var i = 0; i < years.length; i++) {
+		dataByYears[i] = [];
+		for (var j = 0; j < dates.length; j++) {
+			dataByYears[i].push({
+				"date": dates[j],
+				"value": data[i][dates[j]]
+			});
+		}
+	}
+	
+	console.log(dataByYears);
+
+	var svg = d3.select("body")
+				.append("svg")
+				.attr("width", w)
+				.attr("height", h);
+
+	//Make a line for each year
+	for (var k = 0; k < years.length; k++) {
+
+		svg.data([ dataByYears[k] ])
+				.append("path")
+				.attr("d", line)
+				.attr("fill", "none")
+				//.attr("stroke", "gray")
+				.attr("stroke", colors(k))
+				.attr("stroke-width", 2)
+				.call(transition)
+				.append("title")
+				.text(years[k]);
+
+	}
+
+	d3.selectAll("path")
+		.on("mouseover", function(d, i) {
+			d3.select(this)
+				.attr("stroke", colors(i));
+		})
+		.on("mouseout", function() {
+			d3.select(this)
+				.attr("stroke", "gray");
+		});
+
+
+	//X axis
+	svg.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0," + (h - padding) + ")")
+		.call(xAxis);
+	
+	//Y axis
+	svg.append("g")
+		.attr("class", "y axis")
+		.attr("transform", "translate(" + (padding) + ",0)")
+		.call(yAxis);
+
+
+
+	function transition(path) {
+	  path.transition()
+	      .duration(7500)
+	      .attrTween("stroke-dasharray", tweenDash);
+	      //.each("end", function() { d3.select(this).call(transition); });
+	}
+
+function tweenDash() {
+  var l = this.getTotalLength(),
+      i = d3.interpolateString("0," + l, l + "," + l);
+  return function(t) { return i(t); };
+}
+
+
+});
+
+
+
+
+		</script>
+	</body>
+</html>

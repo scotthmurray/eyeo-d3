@@ -18,7 +18,9 @@
 				.data(numbers)
 				.enter()
 				.append("h3")
-				.text(function(d) { return d; });
+				.text(function(d) {
+					return d;
+				});
 
 
 
@@ -27,7 +29,10 @@
 			//
 
 			var animals = [ 
-				{ animal: "cat", type: "mammal" },
+				{ 
+					animal: "cat",
+					type: "mammal"
+				},
 				{ animal: "snake", type: "reptile" },
 				{ animal: "warbler", type: "bird" }
 			];

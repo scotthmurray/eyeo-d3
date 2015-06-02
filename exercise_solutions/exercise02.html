@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: Create an SVG with D3</title>
+		<script type="text/javascript" src="../d3.js"></script>
+		<style type="text/css">
+			
+			body {
+				background-color: gray;
+			}
+
+			svg {
+				background-color: white;
+			}
+
+		</style>
+	</head>
+	<body>		
+		<script type="text/javascript">
+			
+			//Create SVG element
+			var svg = d3.select("body")
+						.append("svg")
+						.attr("width", 500)
+						.attr("height", 200);
+
+			svg.append("circle")
+				.attr("cx", 100)
+				.attr("cy", 30)
+				.attr("r", 25)
+				.attr("fill", "blue");
+
+			svg.append("circle")
+				.attr("cx", 400)
+				.attr("cy", 30)
+				.attr("r", 25)
+				.attr("fill", "blue");
+
+			svg.append("circle")
+				.attr("cx", 250)
+				.attr("cy", 120)
+				.attr("r", 75)
+				.attr("fill", "red");
+			
+		</script>
+	</body>
+</html>
